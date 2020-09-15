@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Invoice | Clubsbasic</title>
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/x-icon" href="img/LOGO%20Asset%2013ldpi.png">
+    <style>
+        /* heading */
+
+        h1 {
+            font: bold 100% sans-serif;
+            letter-spacing: 0.5em;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* table */
+
+        table {
+            font-size: 85%;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        table {
+            border-spacing: 2px;
+        }
+
+        th,
+        td {
+            border-width: 1px;
+            padding: 0.5em;
+            position: relative;
+            text-align: left;
+        }
+
+        th,
+        td {
+            border-style: solid;
+        }
+
+        th {
+            background: #E30613;
+            border-color: #BBB;
+            color: #fff;
+        }
+
+        td {
+            border-color: #DDD;
+        }
+
+        /* page */
+
+        html {
+            font: 16px/1 'Open Sans', sans-serif;
+            overflow: auto;
+            padding: 0.5in;
+        }
+
+        html {
+            background: #999;
+            cursor: default;
+        }
+
+        body {
+            box-sizing: border-box;
+            height: 11in;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 0.5in;
+            width: 8.5in;
+        }
+
+        body {
+            background: #FFF;
+            border-radius: 1px;
+            box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+        }
+
+        /* header */
+
+        .invoice-header {
+            margin: 0 0 3em;
+        }
+
+        .invoice-header:after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+
+        .invoice-header h1 {
+            background: #000;
+            border-radius: 0.25em;
+            color: #FFF;
+            margin: 0 0 1em;
+            padding: 0.5em 0;
+        }
+
+        .invoice-header .address {
+            float: left;
+
+        }
+
+        .invoice-customer {
+            font-style: normal;
+        }
+
+
+        .invoice-header .address p {
+            margin: 10px 0;
+        }
+
+
+        .invoice-customer h5 {
+            font-size: 17px;
+            margin: 0;
+            background: #E30613;
+            padding: 5px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .invoice-customer p {
+            margin: 10px 0;
+        }
+
+        .invo-total-price th,
+        .invo-total-price td {
+            border: none;
+            background: transparent !important;
+            color: #fff !important;
+        }
+
+        .invo-total-price {
+            background: black;
+            color: #fff;
+        }
+
+        .invoice-terms {
+            float: left;
+            width: 50%;
+            border: 1px solid #ddd;
+        }
+
+        .invoice-terms ol {
+            margin: 0;
+            padding-inline-start: 20px;
+        }
+
+        .invoice-terms h4 {
+            margin: 0;
+            background: #E30613;
+            padding: 3px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .tc-ol {
+            padding: 10px;
+        }
+
+        .tc-ol ol li {
+            margin-bottom: 10px;
+        }
+
+        /* article */
+
+        article,
+        article address,
+        table.meta,
+        table.inventory {
+            margin: 0 0 30px;
+        }
+
+        article:after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+
+        article address {
+            float: left;
+        }
+
+        /* table meta & balance */
+
+        table.meta,
+        table.balance {
+            float: right;
+            width: 41%;
+        }
+
+        table.meta:after,
+        table.balance:after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+
+        /* table meta */
+        .meta-box{
+            width: 41%;
+            float: right;
+        }
+        .meta-box table.meta{
+            width: 100%;
+        }
+        .meta-box p{
+            margin: 10px 0;
+            text-align: right;
+        }
+
+        table.meta th {
+            width: 40%;
+            background: #eee;
+            color: black;
+        }
+
+        table.meta td {
+            width: 60%;
+        }
+
+        /* table items */
+
+        table.inventory {
+            clear: both;
+            width: 100%;
+        }
+
+        table.inventory th {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .inventory select {
+            padding: 5px 7px;
+        }
+
+        .inventory .in-price {
+            text-transform: uppercase;
+        }
+
+        /* table balance */
+
+        table.balance th {
+            background: #EEE;
+            color: #000;
+        }
+
+        table.balance th,
+        table.balance td {
+            width: 50%;
+        }
+
+        table.balance td {
+            text-align: right;
+        }
+
+        /* aside */
+
+        aside h1 {
+            border: none;
+            border-width: 0 0 1px;
+            margin: 0 0 1em;
+        }
+
+        aside h1 {
+            border-color: #999;
+            border-bottom-style: solid;
+        }
+
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+            }
+
+            html {
+                background: none;
+                padding: 0;
+            }
+
+            body {
+                box-shadow: none;
+                margin: 0;
+            }
+
+            span:empty {
+                display: none;
+            }
+
+            .add,
+            .cut {
+                display: none;
+            }
+        }
+
+        @page {
+            margin: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!--start invoice area-->
+
+    <div class="invoice-header">
+        <div class="invoice-logo" style="overflow: hidden; margin-bottom: 15px;">
+            <img src="img/LOGO%20Asset%2010ldpi.png" style="float: right; width: 160px; overflow: hidden" alt="">
+        </div>
+        <h1>Invoice</h1>
+        <div class="address">
+            <div class="invoice-self">
+                <p>Alourouba cross King AbdulAziz Street</p>
+                <p>RIYADH -KSA</p>
+                <p>Website: <a href="https://clubsbasic.com">clubsbasic.com</a></p>
+                <p>Phone:+966114666606 | +966 55 303 8504 </p>
+                <p>Email: <a href="#">info@clubbasic.com</a></p>
+                <p>Prepared by: [salesperson name]</p>
+            </div>
+        </div>
+    </div>
+    <article>
+        <address>
+            <div class="invoice-customer">
+                <h5>Customer</h5>
+                <p>[Imran Ahmed]</p>
+                <p>[Company Name]</p>
+                <p>[Baliadangi]</p>
+                <p>[Baliadangi, Thakurgaon-5140]</p>
+                <p>[01755430927]</p>
+            </div>
+        </address>
+        <div class="meta-box">
+           <p><strong>C.R: 1010596023</strong></p>
+           <p><strong>VAT ID: 310381669400003</strong></p>
+            <table class="meta">
+
+                <tr>
+                    <th>DATE</th>
+                    <td>12/15/2019</td>
+                </tr>
+                <tr>
+                    <th>QUOTE #</th>
+                    <td>[123456]</td>
+                </tr>
+                <tr>
+                    <th>CUSTOMER ID</th>
+                    <td>[123]</td>
+                </tr>
+            </table>
+        </div>
+        <table class="inventory">
+            <thead>
+                <tr>
+                    <th><span>S.N</span></th>
+                    <th><span>Image</span></th>
+                    <th><span>Title</span></th>
+                    <th><span>Qty</span></th>
+                    <th><span>Price</span></th>
+                    <th><span>Total</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span>1</span></td>
+                    <td><span>
+                            <center><img src="img/M5-B_05.png" width="50px" alt=""></center>
+                        </span></td>
+                    <td><span>Product Name</span></td>
+                    <td>
+                        <center>
+                            <select class="custom-select">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
+                        </center>
+                    </td>
+                    <td><span class="in-price">400 Sar</span></td>
+                    <td><span class="in-price">400 Sar</span></td>
+                </tr>
+                <tr>
+                    <td><span>2</span></td>
+                    <td><span>
+                            <center><img src="img/M5-B_05.png" width="50px" alt=""></center>
+                        </span></td>
+                    <td><span>Product Name</span></td>
+                    <td>
+                        <center>
+                            <select class="custom-select">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
+                        </center>
+                    </td>
+                    <td><span class="in-price">400 Sar</span></td>
+                    <td><span class="in-price">400 Sar</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <article>
+            <div class="invoice-terms">
+                <h4>Terms and Condition</h4>
+                <div class="tc-ol">
+                    <ol>
+                        <li>The period for replacement of accessories is 3 days.</li>
+                        <li>The allowed period for retrieving the accessories is only one day.</li>
+                        <li>The devices cannot be replaced or restored unless there is a factory defect.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <table class="meta">
+                <tr>
+                    <th>Sutotal</th>
+                    <td>SAR 1,850.00</td>
+                </tr>
+                <tr>
+                    <th>Taxable</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Tax rate</th>
+                    <td>5.000%</td>
+                </tr>
+                <tr>
+                    <th>Tax due</th>
+                    <td>SAR 92.50</td>
+                </tr>
+                <tr>
+                    <th>Other</th>
+                    <td>SAR 0.00</td>
+                </tr>
+                <tr class="total-border">
+
+                </tr>
+                <tr class="invo-total-price">
+                    <th>Total</th>
+                    <td>SAR 1,942.50</td>
+                </tr>
+            </table>
+        </article>
+    </article>
+
+
+    <!--end invoice area-->
+
+
+
+
+
+</body>
+
+</html>
